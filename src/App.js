@@ -1,34 +1,9 @@
 /** @format */
 
 import React, { useState, useEffect } from "react";
+import SearchBar from "./SearchBar";
 import axios from "axios";
 import "./App.css";
-
-class SearchBar extends React.Component {
-  state = { term: "" };
-  onFormSubmit = (e) => {
-    e.preventDefault();
-    this.props.onSubmit(this.state.term);
-  };
-  render() {
-    return (
-      <div className="ui segment">
-        <form onSubmit={this.onFormSubmit} className="ui form">
-          <div className="field">
-            <label style={{ textAlign: "center" }}>Image Search</label>
-            <input
-              type="text"
-              value={this.state.term}
-              onChange={(e) => {
-                this.setState({ term: e.target.value });
-              }}
-            />
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
 
 function App() {
   const text1 =
@@ -53,6 +28,7 @@ function App() {
         `https://api.nasa.gov/planetary/apod?api_key=HiRCIgjcULXuND5KQc15tzbGnzDrWmqstWWDa5QA&date=${term}`
       )
       .then((response) => {
+        console.log("how many times")
         setImages(response.data.url);
         setDate(response.data.date);
         setExplanation(response.data.explanation);
