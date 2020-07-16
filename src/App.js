@@ -3,7 +3,30 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import axios from "axios";
+import styled from "styled-components"
+
 import "./App.css";
+
+const Image = styled.img`
+  width: 45vw;
+  height: auto;
+  margin: 5rem;
+`
+
+const Paragraph = styled.p`
+padding: 3rem;
+width: 80vw;
+${'' /* border: red 2px solid; */}
+font-size: 1.5rem
+`
+
+const CenterDiv = styled.div`
+display: flex;
+justify-content: space-around;
+${'' /* border: red 2px solid; */}
+
+`
+
 
 function App() {
   const text1 =
@@ -37,15 +60,23 @@ function App() {
       })
       .catch((err) => console.log("there was an error:", err));
   }
+  useEffect(() => {
+    document.title = `POD for ${date}`;
+  })
+
 
   return (
     <div className="App">
       <SearchBar onSubmit={onSearchSubmit} />
-      <img src={images} alt="Nasa images" />
+      <Image src={images} alt="Nasa images" />
+      
       <h3>{title}</h3>
       <span>{date}</span>
-      <p>{explanation}</p>
-      <div>HD URl: {hdurl} </div>
+      <CenterDiv><Paragraph>{explanation}</Paragraph></CenterDiv>
+      
+      <div>HD URl:
+      <a href={hdurl} target="_blank" > {hdurl} </a>
+        </div>
     </div>
   );
 }
